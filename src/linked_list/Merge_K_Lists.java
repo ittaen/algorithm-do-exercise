@@ -1,8 +1,11 @@
 package linked_list;
 
-import java.util.*;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import linked_list.base.ListNode;
+import linked_list.util.LinkedListGenerator;
+
+import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.PriorityQueue;
 
 /**
  * 合并k个已排序的链表
@@ -23,43 +26,12 @@ public class Merge_K_Lists {
 
     public static void main(String[] args) {
         String str = "[{-9},{},{-10,-8,-2,-1,2},{-10,-9,-7,-6,-5,-2,-2,1,4},{-7,-7,-1,0,4},{},{-4,0},{-9,-6,-5,-5,-2,2,3,3}]";
-        str = str.replace("[", "")
-                .replace("]", "");
-        ArrayList<ListNode> list = (ArrayList<ListNode>) Stream.of(str.split("},\\{")).map(s -> {
-            s = s.replace("{", "")
-                    .replace("}", "");
-            String[] nums = s.split(",");
-            ListNode head = null;
-            if (nums.length == 1 && nums[0].equals("")) {
-                return head;
-            }
-            if (nums.length > 0) {
-                head = new ListNode(Integer.parseInt(nums[0]));
-                ListNode last = head;
-                for (int i = 1; i < nums.length; i++) {
-                    ListNode cur = new ListNode(Integer.parseInt(nums[i]));
-                    last.next = cur;
-                    last = cur;
-                }
-                Stream.of(nums).map(s1 -> new ListNode(Integer.parseInt(s1))).collect(Collectors.toList());
-            }
-            return head;
-        }).collect(Collectors.toList());
+        ArrayList<ListNode> list = (ArrayList) LinkedListGenerator.generateMultiList(str);
         Merge_K_Lists app = new Merge_K_Lists();
         ListNode listNode = app.mergeKLists(list);
         while (listNode != null) {
             System.out.println(listNode.val);
             listNode = listNode.next;
-        }
-    }
-
-    public static class ListNode {
-        int val;
-        ListNode next;
-
-        ListNode(int x) {
-            val = x;
-            next = null;
         }
     }
 
