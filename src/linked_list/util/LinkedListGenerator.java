@@ -30,7 +30,7 @@ public class LinkedListGenerator {
                     .replace("}", "");
             String[] nums = s.split(",");
             ListNode head = null;
-            if (nums.length == 1 && nums[0].equals("")) {
+            if (nums.length == 1 && "".equals(nums[0])) {
                 return head;
             }
             if (nums.length > 0) {
@@ -41,11 +41,35 @@ public class LinkedListGenerator {
                     last.next = cur;
                     last = cur;
                 }
-                Stream.of(nums).map(s1 -> new ListNode(Integer.parseInt(s1))).collect(Collectors.toList());
             }
             return head;
         }).collect(Collectors.toList());
         return list;
+    }
+
+    /**
+     *
+     * @param str {1,2,3,4,5}
+     * @return
+     */
+    public static ListNode generateListNode(String str) {
+        str = str.replace("{", "")
+                .replace("}", "");
+        String[] nums = str.split(",");
+        ListNode head = null;
+        if (nums.length == 1 && "".equals(nums[0])) {
+            return head;
+        }
+        if (nums.length > 0) {
+            head = new ListNode(Integer.parseInt(nums[0]));
+            ListNode last = head;
+            for (int i = 1; i < nums.length; i++) {
+                ListNode cur = new ListNode(Integer.parseInt(nums[i]));
+                last.next = cur;
+                last = cur;
+            }
+        }
+        return head;
     }
 
     public static ListNode generateRandomCycleListNode(int maxSize, int maxValue) {
@@ -85,6 +109,38 @@ public class LinkedListGenerator {
 
     public static ListNode generateListNode(int maxSize, int maxValue) {
         return generateCycleListNode(maxSize, maxValue, false);
+    }
+
+    public static void println(ListNode head) {
+        if (head != null) {
+            System.out.print("{");
+            System.out.print(head.val);
+            head = head.next;
+        }
+        while (head != null) {
+            System.out.print("," + head.val);
+            head = head.next;
+        }
+        System.out.println("}");
+    }
+
+    public static ListNode reverse(ListNode head) {
+        ListNode pre = null;
+        ListNode next = null;
+        while (head != null) {
+            next = head.next;
+            head.next = pre;
+            pre  = head;
+            head = next;
+        }
+        return pre;
+    }
+
+    public static void main(String[] args) {
+        ListNode listNode = generateListNode(100, 100);
+        println(listNode);
+        listNode = reverse(listNode);
+        println(listNode);
     }
 
 }
