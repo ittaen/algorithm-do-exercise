@@ -48,6 +48,7 @@ public class LinkedListGenerator {
     }
 
     /**
+     * 生成链表
      *
      * @param str {1,2,3,4,5}
      * @return
@@ -70,6 +71,41 @@ public class LinkedListGenerator {
             }
         }
         return head;
+    }
+
+    /**
+     * 生成有公共节点的两条链表
+     *
+     * @param str {1,2,3},{4,5},{6,7}
+     * @return
+     */
+    public static ListNode[] generateHasCommonNodeList(String str) {
+        // str = "{1,2,3},{4,5},{6,7}";
+        List<ListNode> collect = Stream.of(str.split("},\\{"))
+                .map(LinkedListGenerator::generateListNode)
+                .collect(Collectors.toList());
+        ListNode list1 = collect.get(0);
+        ListNode list2 = collect.get(1);
+        ListNode common = collect.get(2);
+        connectList(list1, common);
+        connectList(list2, common);
+        return new ListNode[]{list1, list2};
+    }
+
+    public static ListNode connectList(ListNode head1, ListNode head2) {
+        if (head1 == null || head2 == null) {
+            return head1 != null ? head1: head2;
+        }
+        ListNode cur = head1;
+        while (true) {
+            // 移动到最后一个节点
+            if (cur.next == null) {
+                cur.next = head2;
+                break;
+            }
+            cur = cur.next;
+        }
+        return head1;
     }
 
     public static ListNode generateRandomCycleListNode(int maxSize, int maxValue) {
@@ -130,7 +166,7 @@ public class LinkedListGenerator {
         while (head != null) {
             next = head.next;
             head.next = pre;
-            pre  = head;
+            pre = head;
             head = next;
         }
         return pre;
@@ -141,6 +177,8 @@ public class LinkedListGenerator {
         println(listNode);
         listNode = reverse(listNode);
         println(listNode);
+        String str = "{1,2,3},{4,5},{6,7}";
+        generateHasCommonNodeList(str);
     }
 
 }
