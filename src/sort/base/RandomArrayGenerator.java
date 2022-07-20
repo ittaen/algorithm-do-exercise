@@ -100,6 +100,24 @@ public class RandomArrayGenerator {
     }
 
     /**
+     * 生成数组
+     *
+     * @param str [1,2,3,4,5,6,7,0]
+     * @return
+     */
+    public static int[] generateArray(String str) {
+        String[] nums = str
+                .replace("[", "")
+                .replace("]", "")
+                .split(",");
+        int[] arr = new int[nums.length];
+        for (int i = 0; i < nums.length; i++) {
+            arr[i] = Integer.parseInt(nums[i]);
+        }
+        return arr;
+    }
+
+    /**
      * 生成二维数组
      *
      * @param str [[1,2,8,9],[2,4,9,12],[4,7,10,13],[6,8,11,15]]
