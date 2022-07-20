@@ -148,6 +148,8 @@ public class LinkedListGenerator {
     }
 
     public static void println(ListNode head) {
+        System.out.print(getLen(head) + " - ");
+        System.out.print(String.format(" asc(%s) - ", isSort(head, true)));
         if (head != null) {
             System.out.print("{");
             System.out.print(head.val);
@@ -170,6 +172,39 @@ public class LinkedListGenerator {
             head = next;
         }
         return pre;
+    }
+
+    public static int getLen(ListNode head) {
+        int len = 0;
+        while (head != null) {
+            len++;
+            head = head.next;
+        }
+        return len;
+    }
+
+    public static boolean isSort(ListNode head, boolean asc) {
+        if (head == null) {
+            return true;
+        }
+        boolean ans = true;
+        int min = head.val;
+        int max = head.val;
+        head = head.next;
+        while (head != null) {
+            int val = head.val;
+            if (asc) {
+                if (val < min) {
+                    return false;
+                }
+            } else {
+                if (val > max) {
+                    return false;
+                }
+            }
+            head = head.next;
+        }
+        return ans;
     }
 
     public static void main(String[] args) {
