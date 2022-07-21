@@ -73,4 +73,72 @@ public class Maximum_Matrix_Sum {
         // 输出最大矩阵和
         System.out.println(max);
     }
+
+    /**
+     * <p>
+     * 面试题 17.24. 最大子矩阵
+     * 给定一个正整数、负整数和 0 组成的 N × M 矩阵，编写代码找出元素总和最大的子矩阵。
+     * <p>
+     * 返回一个数组 [r1, c1, r2, c2]，其中 r1, c1 分别代表子矩阵左上角的行号和列号，r2, c2 分别代表右下角的行号和列号。若有多个满足条件的子矩阵，返回任意一个均可。
+     * <p>
+     * 注意：本题相对书上原题稍作改动
+     * <p>
+     * 示例：
+     * 输入：
+     * [
+     * [-1,0],
+     * [0,-1]
+     * ]
+     * 输出：[0,1,0,1]
+     * 解释：输入中标粗的元素即为输出所表示的矩阵
+     * 说明：
+     * 1 <= matrix.length, matrix[0].length <= 200
+     * <p>
+     * https://leetcode.cn/problems/max-submatrix-lcci/
+     * <p>
+     *
+     * @param matrix
+     * @return
+     */
+    public int[] getMaxMatrix(int[][] matrix) {
+        return solution(matrix);
+    }
+
+    private int[] solution(int[][] matrix) {
+        int[] res = new int[4];
+        int rows = matrix.length;
+        int cols = matrix[0].length;
+        int max = matrix[0][0];
+        // 行开始位置
+        for (int rowStart = 0; rowStart < rows; rowStart++) {
+            // 每一列的和,相当于rowStart..rowEnd的和 组成了一个一维数组最大和问题
+            int[] colSum = new int[cols];
+            // 行结束位置
+            for (int rowEnd = rowStart; rowEnd < rows; rowEnd++) {
+                int matrixSum = 0;
+                // 计算元素和
+                int colStart = 0;
+                for (int i = 0; i < cols; i++) {
+                    // 累加每一列的和
+                    colSum[i] += matrix[rowEnd][i];
+                    // 计算当前矩阵的最大和
+                    matrixSum = Math.max(colSum[i], matrixSum + colSum[i]);
+                    // colStart会更新,保留更新记录，但又不计入res，等到满足 matrixSum > max 才记录
+                    if (colSum[i] == matrixSum) {
+                        colStart = i;
+                    }
+                    // 记录历史矩阵最大和值
+                    if (matrixSum > max) {
+                        res[0] = rowStart;
+                        res[1] = colStart;
+                        res[2] = rowEnd;
+                        res[3] = i;
+                    }
+                    max = Math.max(matrixSum, max);
+                }
+            }
+        }
+        return res;
+    }
+
 }
