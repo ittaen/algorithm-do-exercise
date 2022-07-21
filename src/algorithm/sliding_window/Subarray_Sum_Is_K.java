@@ -61,6 +61,8 @@ public class Subarray_Sum_Is_K {
 
     /**
      * 前缀数组+哈希表
+     * 不理解这里的哈希表是怎么存储到前缀和数组i和j的差值的请看
+     * https://leetcode.cn/problems/QTMn0o/solution/qian-zhui-he-chai-zhi-de-zui-tong-su-jie-oq8q/
      *
      * @param arr
      * @param k
