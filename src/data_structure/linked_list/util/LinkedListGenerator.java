@@ -1,6 +1,6 @@
-package linked_list.util;
+package data_structure.linked_list.util;
 
-import linked_list.base.ListNode;
+import data_structure.linked_list.base.ListNode;
 
 import java.util.ArrayList;
 import java.util.List;

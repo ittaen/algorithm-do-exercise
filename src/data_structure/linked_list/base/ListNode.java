@@ -1,4 +1,4 @@
-package linked_list.base;
+package data_structure.linked_list.base;
 
 /**
  * TODO

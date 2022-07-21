@@ -1,6 +1,6 @@
-package sort;
+package algorithm.sort;
 
-import sort.base.RandomArrayGenerator;
+import algorithm.sort.base.RandomArrayGenerator;
 
 /**
  * 归并排序

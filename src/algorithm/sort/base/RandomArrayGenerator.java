@@ -1,4 +1,4 @@
-package sort.base;
+package algorithm.sort.base;
 
 import java.util.Arrays;
 import java.util.HashSet;

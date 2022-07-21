@@ -1,7 +1,7 @@
-package linked_list;
+package data_structure.linked_list;
 
-import linked_list.base.ListNode;
-import linked_list.util.LinkedListGenerator;
+import data_structure.linked_list.base.ListNode;
+import data_structure.linked_list.util.LinkedListGenerator;
 
 /**
  * 判断一个链表是否为回文结构

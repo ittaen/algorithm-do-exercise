@@ -1,6 +1,6 @@
-package binary_search;
+package algorithm.binary_search;
 
-import sort.base.RandomArrayGenerator;
+import algorithm.sort.base.RandomArrayGenerator;
 
 /**
  * 二分查找-I
