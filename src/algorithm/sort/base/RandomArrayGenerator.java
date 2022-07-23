@@ -141,6 +141,32 @@ public class RandomArrayGenerator {
     }
 
     /**
+     * 生成二维数组
+     *
+     * @param str [['1','1','1','1','0'],['1','1','0','1','0'],['1','1','0','0','0'],['0','0','0','0','0']]
+     * @param str [["1","1","1","1","0"],["1","1","0","1","0"],["1","1","0","0","0"],["0","0","0","0","0"]]
+     * @return
+     */
+    public static char[][] generateTDArray2(String str) {
+        String[] strs = str.split("],\\[");
+        int m = strs.length;
+        char[][] arr = new char[m][];
+        for (int i = 0; i < m; i++) {
+            strs[i] = strs[i].replace("[", "")
+                    .replace("]", "")
+                    .replace("\"", "")
+                    .replace("'", "");
+            String[] nums = strs[i].split(",");
+            int n = nums.length;
+            arr[i] = new char[n];
+            for (int j = 0; j < n; j++) {
+                arr[i][j] = nums[j].toCharArray()[0];
+            }
+        }
+        return arr;
+    }
+
+    /**
      * 根据一个最大值生成随机数
      *
      * @param max
@@ -232,6 +258,26 @@ public class RandomArrayGenerator {
         StringBuilder sb = new StringBuilder();
         sb.append("[");
         for (int[] outer : arr) {
+            sb.append("[");
+            for (int i = 0; i < outer.length; i++) {
+                sb.append(outer[i]);
+                if (i < outer.length - 1) {
+                    sb.append(",");
+                }
+            }
+            sb.append("]");
+        }
+        sb.append("]");
+        System.out.println(sb.toString());
+    }
+
+    public static void printTDArray2(char[][] arr) {
+        if (arr == null) {
+            return;
+        }
+        StringBuilder sb = new StringBuilder();
+        sb.append("[");
+        for (char[] outer : arr) {
             sb.append("[");
             for (int i = 0; i < outer.length; i++) {
                 sb.append(outer[i]);
